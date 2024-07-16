@@ -1,0 +1,106 @@
+// Onclick off link menu login and open dropdown
+const accLink = document.querySelectorAll(".header__action-item.header__action-item--account>div>a");
+for (let i = 0; i < accLink.length; i++) {
+  accLink[i].addEventListener("click", popover);
+}
+
+function popover() {
+  event.preventDefault(); 
+
+  document.querySelector(".popover_account").classList.toggle("popover_visible");
+
+  // All PopoverLink Remove Class "is-selected"
+  const popoverLink = document.querySelectorAll(".popover__panel");
+  for (let i = 0; i < popoverLink.length; i++) {
+    popoverLink[i].classList.remove("is-selected");
+  }
+  document.querySelector(".login_panel").classList.add("is-selected");
+  
+  // Set Popover Height
+  elementHeightPopover();
+}
+
+// Login Page > Register Page
+document.querySelector(".login_panel .form__secondary-action button.link--accented").addEventListener("click", registerBox);
+
+function registerBox() {
+  event.preventDefault();
+
+  // All PopoverLink Remove Class "is-selected"
+  const popoverLink = document.querySelectorAll(".popover__panel");
+  for (let i = 0; i < popoverLink.length; i++) {
+    popoverLink[i].classList.remove("is-selected");
+  }
+  document.querySelector(".register_panel").classList.add("is-selected");
+  
+  // Set Popover Height
+  elementHeightPopover();
+}
+
+// Login Page > Password Recovery Page
+document.querySelector(".login_panel .form__secondary-action a.link--accented").addEventListener("click", popoverPasswordRecover);
+
+function popoverPasswordRecover() {
+  event.preventDefault(); 
+  
+  // All PopoverLink Remove Class "is-selected"
+  const popoverLink = document.querySelectorAll(".popover__panel");
+  for (let i = 0; i < popoverLink.length; i++) {
+    popoverLink[i].classList.remove("is-selected");
+  }
+  document.querySelector(".password-recover_panel").classList.add("is-selected");
+  
+  // Set Popover Height
+  elementHeightPopover();
+}
+
+
+// Register Page > Login Page
+document.querySelector(".register_panel .form__secondary-action a.link").addEventListener("click", popoverLogin);
+
+function popoverLogin() {
+  event.preventDefault(); 
+  
+  // All PopoverLink Remove Class "is-selected"
+  const popoverLink = document.querySelectorAll(".popover__panel");
+  for (let i = 0; i < popoverLink.length; i++) {
+    popoverLink[i].classList.remove("is-selected");
+  }
+  document.querySelector(".login_panel").classList.add("is-selected");
+  
+  // Set Popover Height
+  elementHeightPopover();
+}
+
+// Password Recovery Page > Login Page
+document.querySelector(".password-recover_panel .form__secondary-action .link--accented").addEventListener("click", popoverPasswordToLogin);
+
+function popoverPasswordToLogin() {
+  event.preventDefault(); 
+  
+  // All PopoverLink Remove Class "is-selected"
+  const popoverLink = document.querySelectorAll(".popover__panel");
+  for (let i = 0; i < popoverLink.length; i++) {
+    popoverLink[i].classList.remove("is-selected");
+  }
+  document.querySelector(".login_panel").classList.add("is-selected");
+  
+  // Set Popover Height
+  elementHeightPopover();
+}
+
+// Panel Heiht will be Selected Panel Height
+function elementHeightPopover () {
+  var elemHeight = document.querySelector(".popover__panel.is-selected").clientHeight;
+  document.querySelector(".popover_panel-list").style.height= elemHeight+"px";
+}
+
+//Click Outside Hide Popover
+window.onclick = (event) => {
+    if (!event.target.matches('.popover_account>*, .header__action-item-content>*')) {
+        if(document.querySelector(".popover_account").classList.contains('popover_visible')){
+          document.querySelector(".popover_account").classList.remove('popover_visible')
+        }
+    }
+}
+document.querySelector(".popover_account").addEventListener('click', (event) => event.stopPropagation());
